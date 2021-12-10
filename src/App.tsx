@@ -1,38 +1,56 @@
-import * as React from "react"
+import * as React from "react";
 import {
   ChakraProvider,
   Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
   theme,
-} from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
+  CSSReset,
+  IconButton,
+} from "@chakra-ui/react";
+import User from "./Screens/User";
+import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+function Home() {
+  return <h2>Home</h2>;
+}
+
+function About() {
+  return <h2>About</h2>;
+}
 
 export const App = () => (
   <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
-        </VStack>
-      </Grid>
-    </Box>
+    <CSSReset />
+    <Router>
+      <Menu>
+        <MenuButton
+          as={IconButton}
+          aria-label="Options"
+          icon={<HamburgerIcon />}
+          variant="outline"
+        />
+
+        <MenuList>
+          <MenuItem>
+            <Link to="/">Home</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/users">Enter Users</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link to="/about">About</Link>
+          </MenuItem>
+        </MenuList>
+      </Menu>
+      <Box p={4}>
+        <Routes>
+          <Route path="/about" element={<About />} />
+          <Route path="/users" element={<User />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+        {/*<HookForm />*/}
+      </Box>
+    </Router>
   </ChakraProvider>
-)
+);
