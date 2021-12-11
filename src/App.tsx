@@ -7,17 +7,11 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import User from "./Screens/User";
+import Users from "./Screens/Users";
+import Home from "./Screens/Home";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
 
 export const App = () => (
   <ChakraProvider theme={theme}>
@@ -36,17 +30,17 @@ export const App = () => (
             <Link to="/">Home</Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/users">Enter Users</Link>
+            <Link to="/user">Enter Users</Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/about">About</Link>
+            <Link to="/users">Users</Link>
           </MenuItem>
         </MenuList>
       </Menu>
       <Box p={4}>
         <Routes>
-          <Route path="/about" element={<About />} />
-          <Route path="/users" element={<User />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/user" element={<User />} />
           <Route path="/" element={<Home />} />
         </Routes>
         {/*<HookForm />*/}
