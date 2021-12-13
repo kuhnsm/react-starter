@@ -13,6 +13,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import UserType from "../Models/User";
+import { addUser } from "../Api/Users";
 
 export default function User() {
   const {
@@ -24,7 +25,8 @@ export default function User() {
   function onSubmit(values: UserType) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
+        // alert(JSON.stringify(values, null, 2));
+        addUser(values);
         resolve(true);
       }, 3000);
     });

@@ -9,40 +9,43 @@ import {
   Tr,
   Th,
   Td,
-  Image,
 } from "@chakra-ui/react";
+import UserType from "../Models/User";
 
 export default function Users() {
-  const [users, setUsers] = useState<any>([]);
+  const [users, setUsers] = useState<UserType[]>([]);
   useEffect(() => {
-    getUsers().then(({ data }) => {
-      setUsers(data);
+    getUsers().then((users: UserType[]) => {
+      console.log(users);
+      setUsers(users);
     });
   }, []);
   return (
     <Box>
-      <Heading ml={15}>Users!!!!</Heading>
+      <Heading ml={15}>Users</Heading>
       <Table variant="simple">
         <Thead>
           <Tr>
-            <Th>Avatar</Th>
             <Th>First Name</Th>
             <Th>Last Name</Th>
-            <Th>Username</Th>
-            <Th>Email</Th>
+            <Th>Gender</Th>
+            <Th>Marital Status</Th>
+            <Th>Birthdate</Th>
+            <Th>Salary</Th>
+            <Th>Status</Th>
           </Tr>
         </Thead>
         <Tbody>
-          {users?.map((user: any) => {
+          {users?.map((user: UserType) => {
             return (
               <Tr key={user.id}>
-                <Td>
-                  <Image src={user.avatar}></Image>
-                </Td>
-                <Td>{user.first_name}</Td>
-                <Td>{user.last_name}</Td>
-                <Td>{user.username}</Td>
-                <Td>{user.email}</Td>
+                <Td>{user.firstName}</Td>
+                <Td>{user.lastName}</Td>
+                <Td>{user.gender}</Td>
+                <Td>{user.maritalStatus}</Td>
+                <Td>{user.birthdate}</Td>
+                <Td>{user.salary}</Td>
+                <Td>{user.active ? "Active" : "Inactive"}</Td>
               </Tr>
             );
           })}
