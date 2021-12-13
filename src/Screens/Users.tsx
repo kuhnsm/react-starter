@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getUsers } from "../Api/Users";
-
 import {
   Box,
   Heading,
