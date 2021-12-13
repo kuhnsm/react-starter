@@ -6,6 +6,7 @@ import {
   Input,
   Button,
 } from "@chakra-ui/react";
+import UserType from "../Models/User";
 
 export default function User() {
   const {
@@ -14,7 +15,7 @@ export default function User() {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  function onSubmit(values: any) {
+  function onSubmit(values: UserType) {
     return new Promise((resolve) => {
       setTimeout(() => {
         alert(JSON.stringify(values, null, 2));
