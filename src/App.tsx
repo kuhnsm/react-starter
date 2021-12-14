@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ChakraProvider, Box, theme, CSSReset } from "@chakra-ui/react";
 import User from "./Screens/User";
 import Users from "./Screens/Users";
@@ -8,14 +7,16 @@ import Settings from "./Screens/Settings";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SideTopNav from "./Layouts/SideTopNav";
 import Login from "./Screens/Login";
+import { useAppSelector } from "./Redux/hooks";
+import { selectToken } from "./Redux/loginSlice";
 
 export const App = () => {
-  const [token, setToken] = useState("");
+  const token = useAppSelector(selectToken);
   return (
     <ChakraProvider theme={theme}>
       <CSSReset />
       <Router>
-        {!token && <Login setToken={setToken} />}
+        {!token && <Login />}
         {token && (
           <SideTopNav>
             <Box p={4}>

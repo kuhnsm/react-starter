@@ -10,15 +10,20 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
+import { useAppDispatch } from "../Redux/hooks";
+import { setReduxToken } from "../Redux/loginSlice";
 
-const Login = ({ setToken }: { setToken: any }) => {
+const Login = () => {
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
   } = useForm();
+  const dispatch = useAppDispatch();
+
   function onSubmit(values: any) {
-    setToken(uuidv4());
+    const newToken = uuidv4();
+    dispatch(setReduxToken(newToken));
   }
   return (
     <Box>
