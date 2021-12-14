@@ -1,6 +1,12 @@
 This project was bootstrapped with
 [Create React App](https://github.com/facebook/create-react-app).
 
+The project also includes 
+* [Chakra UI](https://chakra-ui.com/)
+* [React Router](https://reactrouter.com/) 
+* [React Redux](https://react-redux.js.org/)
+* [Typescript](https://www.typescriptlang.org/)
+
 ## Available Scripts
 
 In the project directory, you can run:
