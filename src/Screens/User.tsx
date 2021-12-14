@@ -12,24 +12,43 @@ import {
   Checkbox,
   Textarea,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import UserType from "../Models/User";
-import { addUser } from "../Api/Users";
+import { addUser, editUser } from "../Api/Users";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function User() {
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
+    setValue,
   } = useForm();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location?.state?.user) {
+      const thisUser = location.state.user; //convenience
+      setValue("firstName", thisUser.firstName);
+      setValue("lastName", thisUser.lastName);
+      setValue("gender", thisUser.gender);
+      setValue("maritalStatus", thisUser.maritalStatus);
+      setValue("birthdate", thisUser.birthdate);
+      setValue("salary", thisUser.salary);
+      setValue("active", thisUser.active);
+      setValue("comments", thisUser.comments);
+    }
+  }, [location, setValue]);
 
   function onSubmit(values: UserType) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // alert(JSON.stringify(values, null, 2));
-        addUser(values);
-        resolve(true);
-      }, 3000);
-    });
+    if (location?.state?.user?.id) {
+      values.id = location?.state?.user?.id;
+      editUser(values);
+    } else {
+      addUser(values);
+    }
+    navigate("/users");
   }
 
   return (

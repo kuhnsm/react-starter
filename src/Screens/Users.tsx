@@ -11,15 +11,27 @@ import {
   Td,
 } from "@chakra-ui/react";
 import UserType from "../Models/User";
+import { CloseIcon, EditIcon } from "@chakra-ui/icons";
+import { useNavigate } from "react-router-dom";
+import { deleteUser } from "../Api/Users";
 
-export default function Users() {
+function Users() {
+  const navigate = useNavigate();
   const [users, setUsers] = useState<UserType[]>([]);
   useEffect(() => {
     getUsers().then((users: UserType[]) => {
-      console.log(users);
       setUsers(users);
     });
   }, []);
+  const editUser = (user: UserType) => {
+    navigate("/user", { state: { user: user } });
+  };
+  const deleteThisUser = (user: UserType) => {
+    deleteUser(user);
+    getUsers().then((users: UserType[]) => {
+      setUsers(users);
+    });
+  };
   return (
     <Box>
       <Heading ml={15}>Users</Heading>
@@ -33,6 +45,7 @@ export default function Users() {
             <Th>Birthdate</Th>
             <Th>Salary</Th>
             <Th>Status</Th>
+            <Th>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -46,6 +59,10 @@ export default function Users() {
                 <Td>{user.birthdate}</Td>
                 <Td>{user.salary}</Td>
                 <Td>{user.active ? "Active" : "Inactive"}</Td>
+                <Td>
+                  <EditIcon onClick={() => editUser(user)} />{" "}
+                  <CloseIcon onClick={() => deleteThisUser(user)} />
+                </Td>
               </Tr>
             );
           })}
@@ -54,3 +71,5 @@ export default function Users() {
     </Box>
   );
 }
+
+export default Users;
