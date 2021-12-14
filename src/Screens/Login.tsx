@@ -9,10 +9,10 @@ import {
   Box,
   Flex,
 } from "@chakra-ui/react";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import { useAppDispatch } from "../Redux/hooks";
-import { setReduxToken } from "../Redux/loginSlice";
-
+import { loginAsync } from "../Redux/loginSlice";
+// import { setReduxToken } from "../Redux/loginSlice";
 const Login = () => {
   const {
     handleSubmit,
@@ -22,8 +22,9 @@ const Login = () => {
   const dispatch = useAppDispatch();
 
   function onSubmit(values: any) {
-    const newToken = uuidv4();
-    dispatch(setReduxToken(newToken));
+    // const newToken = uuidv4();
+    // dispatch(setReduxToken(newToken));
+    dispatch(loginAsync(values));
   }
   return (
     <Box>
