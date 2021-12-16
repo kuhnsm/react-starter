@@ -9,28 +9,30 @@ import SideTopNav from "./Layouts/SideTopNav";
 import Login from "./Screens/Login";
 import { useAppSelector } from "./Redux/hooks";
 import { selectToken } from "./Redux/loginSlice";
-
+import ErrorBoundary from "./Components/ErrorBoundary";
 export const App = () => {
   const token = useAppSelector(selectToken);
   return (
-    <ChakraProvider theme={theme}>
-      <CSSReset />
-      <Router>
-        {!token && <Login />}
-        {token && (
-          <SideTopNav>
-            <Box p={4}>
-              <Routes>
-                <Route path="/users" element={<Users />} />
-                <Route path="/user" element={<User />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/Help" element={<Help />} />
-                <Route path="/" element={<Home />} />
-              </Routes>
-            </Box>
-          </SideTopNav>
-        )}
-      </Router>
-    </ChakraProvider>
+    <ErrorBoundary>
+      <ChakraProvider theme={theme}>
+        <CSSReset />
+        <Router>
+          {!token && <Login />}
+          {token && (
+            <SideTopNav>
+              <Box p={4}>
+                <Routes>
+                  <Route path="/users" element={<Users />} />
+                  <Route path="/user" element={<User />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="/Help" element={<Help />} />
+                  <Route path="/" element={<Home />} />
+                </Routes>
+              </Box>
+            </SideTopNav>
+          )}
+        </Router>
+      </ChakraProvider>
+    </ErrorBoundary>
   );
 };

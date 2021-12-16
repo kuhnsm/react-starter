@@ -181,6 +181,7 @@ export default function User() {
         </FormErrorMessage>
       </FormControl>
       <FormControl isInvalid={errors.comments}>
+        <FormLabel htmlFor="comments">Comments</FormLabel>
         <Textarea
           id="comments"
           {...register("comments")}
