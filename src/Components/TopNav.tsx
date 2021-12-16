@@ -33,6 +33,12 @@ const MobileMenu = () => {
         <MenuItem>
           <Link to="/users">Users</Link>
         </MenuItem>
+        <MenuItem>
+          <Link to="/settings">Settings</Link>
+        </MenuItem>
+        <MenuItem>
+          <Link to="/help">Help</Link>
+        </MenuItem>
       </MenuList>
     </Menu>
   );
